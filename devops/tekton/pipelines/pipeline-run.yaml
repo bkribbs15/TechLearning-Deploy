@@ -8,7 +8,7 @@ spec:
   - name: image-registry-url
     value: "quay.io/bkribbs15/code-site"
   - name: image-version
-    value: "1"
+    value: "v1"
   serviceAccountName: pipeline
   pipelineRef:
     name: site-image-build-push
