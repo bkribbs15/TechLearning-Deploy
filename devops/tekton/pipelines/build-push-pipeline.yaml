@@ -27,7 +27,7 @@ spec:
     - name: build-push-1
       params:
         - name: IMAGE
-          value: $(params.image-registry-url)/code.site:$(params.image-version)
+          value: $(params.image-registry-url):$(params.image-version)
         - name: DOCKERFILE
           value: '.'
         - name: CONTEXT
