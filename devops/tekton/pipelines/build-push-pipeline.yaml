@@ -29,9 +29,9 @@ spec:
         - name: IMAGE
           value: $(params.image-registry-url):$(params.image-version)
         - name: DOCKERFILE
-          value: '.'
+          value: './Dockerfile'
         - name: CONTEXT
-          value: './'
+          value: '.'
       runAfter:
         - clone-1
       taskRef:
