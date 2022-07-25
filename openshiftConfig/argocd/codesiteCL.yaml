@@ -4,8 +4,8 @@ metadata:
   name: code-site-cl
 spec:
   applicationMenu:
-      section: Website
+    section: Website
   # Update with valid https url
-  href: http://code-site-route-dev.itzroks-27000799j3-0qqec7-6ccd7f378ae819553d37d5f2ee142bd6-0000.us-east.containers.appdomain.cloud
+  href: https://code-site-route-dev.itzroks-27000799j3-0qqec7-6ccd7f378ae819553d37d5f2ee142bd6-0000.us-east.containers.appdomain.cloud
   location: ApplicationMenu
   text: Code Site
