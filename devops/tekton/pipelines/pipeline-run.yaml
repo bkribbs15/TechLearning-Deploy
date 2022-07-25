@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-image-build
+  namespace: dev
+spec:
+  params:
+  - name: image-registry-url
+    value: "quay.io/bkribbs15/code-site"
+  - name: image-version
+    value: "1"
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: site-image-build-push
+  workspaces:
+  - name: code-site
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi

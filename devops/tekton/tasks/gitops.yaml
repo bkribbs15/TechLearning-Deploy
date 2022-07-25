@@ -1,0 +1,52 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: update-version-task
+spec:
+  description: >-
+    This Task updates the version of the deploy.
+
+  params:
+  - name: IMAGE_VERSION
+    description: Name (reference) of the image to build.
+  - name: UPDATE_IMAGE
+    description: The Git Image to make the PR and Push for the Gitops Repo.
+    default: quay.io/ibmtechgarage/ibmcloud-dev
+  workspaces:
+  - name: source
+    description: Holds the context and docker file
+  steps:
+  - name: version-update
+    workingDir: $(workspaces.source.path)
+    image: $(params.UPDATE_IMAGE)
+    script: |
+      #!/bin/sh
+      set -e
+      ls 
+
+      ########################
+      # Setting Git User 
+      ########################
+      git config --global user.email "bkribbs15@gmail.com"
+      git config --global user.name "Bryan Kribbs"
+      
+      echo '########################'
+      echo '# Checking Git Status'
+      echo '########################'
+      git checkout main
+      git pull origin main
+      git status
+
+      echo 'New Image Version: $(params.IMAGE_VERSION)'
+      echo '########################'
+      echo '# Changing Image Version'
+      echo '########################'
+      cat ./deploy/openshift/deployment.yaml | yq '.spec.template.spec.containers[0].image = "quay.io/bkribbs15/code-site:$(params.IMAGE_VERSION)"' -i ./deploy/openshift/deployment.yaml
+
+      echo '########################'
+      echo '# Pushing to Git'
+      echo '########################'
+
+      git add . 
+      git commit -m "Pushing new image version $(params.IMAGE_VERSION)"
+      git push 
