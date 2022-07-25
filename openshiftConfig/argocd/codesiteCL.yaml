@@ -1,7 +1,7 @@
 apiVersion: console.openshift.io/v1
 kind: ConsoleLink
 metadata:
-  name: Code-Site
+  name: code-site-cl
 spec:
   applicationMenu:
       section: Website
